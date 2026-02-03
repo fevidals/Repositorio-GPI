@@ -6,7 +6,7 @@ Este repositorio contiene los directorios, códigos, imágenes y archivos utiliz
 **Curso:** Gestión de Proyectos de Investigación y Ciencia Abierta
 
 ## Equipo del proyecto
-| Integrantes | Rol / Enfoque |
+| Integrantes | Rol |
 |--------------|---------------|
 | **Vivian Cabanzo** | 
 | **Laura Díaz** | 
