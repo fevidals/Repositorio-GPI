@@ -21,10 +21,15 @@ El repositorio opera bajo una licencia MIT que permite.
 ## 4. Estructura de Directorios
 En este repositorio vamos a aplicar el protocolo de documentación Teaching Integrety in Empirical Research (*TIER*) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
 
-* **`/data`**: Contiene los archivos originales (Original Data) y los datos procesados (Analysis Data).
-* **`/scripts`**: Scripts para la limpieza de datos (`cleaning.R`/`.do`) y análisis estadístico (`analysis.R`/`.do`).
-* **`/views`**: Salidas finales de la replicación (Tablas y Gráficos) para comparar con el paper original.
-* **`/documentos`**: Documentación del proyecto, bitácora y manuscrito final.
+* **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo.
+* **`/scripts`**: códigos con todo el proceso de limpieza, manipulación de datos y generación de resultados.
+* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
+* **`/documents`**: documentación del proyecto y manuscrito final.
 
 ## 5. Requisitos Iniciales Identificados
-Para poder realizar el proceso de replicabilidad del artículo seleccionado necesitamos 
+Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos ténicos y de información:
+
+* **Software:**
+* **Control de Versiones:**
+* **Acceso a Datos:**
+* **Librerías/Paquetes:**
