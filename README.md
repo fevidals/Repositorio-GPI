@@ -15,8 +15,21 @@
 
 
 ## 3. Descripción General
-Este repositorio contiene los directorios, códigos, imágenes y archivos utilizados en la realización del proyecto asignado en el periodo 2026-1
+El objetivo del proyecto es lograr la replicabilidad de los resultados presentados en el artículo seleccionado. En este repositorio van a estar contenidos los datos originales, 
+El repositorio opera bajo una licencia MIT que permite.
 
 ## 4. Estructura de Directorios
+En este repositorio vamos a aplicar el protocolo de documentación Teaching Integrety in Empirical Research (*TIER*) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
+
+* **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo.
+* **`/scripts`**: códigos con todo el proceso de limpieza, manipulación de datos y generación de resultados.
+* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
+* **`/documents`**: documentación del proyecto y manuscrito final.
 
 ## 5. Requisitos Iniciales Identificados
+Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos ténicos y de información:
+
+* **Software:**
+* **Control de Versiones:**
+* **Acceso a Datos:**
+* **Librerías/Paquetes:**
