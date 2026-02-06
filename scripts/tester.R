@@ -1,0 +1,1 @@
+#### En esta carpeta (scripts) van a estar todos los códigos de la réplica del artículo
