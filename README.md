@@ -16,10 +16,10 @@
 
 ## 3. Descripción General
 El objetivo del proyecto es lograr la replicabilidad de los resultados presentados en el artículo seleccionado. En este repositorio van a estar contenidos los datos originales, 
-El repositorio opera bajo una licencia MIT que permite.
+El repositorio opera bajo una licencia MIT que permite a cualquier persona pueda distribuir, modificar y usar comercialmente los códigos del respositorio, sin embargo, estos deben nombrar a los autores y el código viene sin garantía alguna.
 
 ## 4. Estructura de Directorios
-En este repositorio vamos a aplicar el protocolo de documentación Teaching Integrety in Empirical Research (*TIER*) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
+En este repositorio vamos a aplicar el protocolo de documentación *Teaching Integrety in Empirical Research* (**TIER**) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
 
 * **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo.
 * **`/scripts`**: códigos con todo el proceso de limpieza, manipulación de datos y generación de resultados.
