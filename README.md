@@ -6,7 +6,7 @@
 
 ## 2. Equipo de Trabajo
 
-| Integrantes | Rol asignado |
+| Integrantes | Rol Asignado |
 |--------------|---------------|
 | **Vivian Cabanzo** | Project Manager |
 | **Laura Díaz** | Investigación teórica y revisión de literatura |
@@ -31,7 +31,7 @@ En este repositorio vamos a aplicar el protocolo de documentación *Teaching Int
 ## 5. Requisitos Iniciales Identificados
 Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos técnicos y de información:
 
-* **Sistemas Operativos:** Windows 11, macOS 26.2 o Ubuntu 24.04.4
+* **Sistemas Operativos:** Windows 11, macOS Sequoia (15.2) o Ubuntu 24.04.4
 * **Software:** The R project (4.5.2), RStudio (2026.01.0) como IDE y Overleaf como editor de texto para LaTeX.
 * **Control de Versiones:** Git (2.53.0) y GitHub Desktop (3.5.4).
 * **Acceso a Datos:** los datos originales están disponibles en *The Center for Open Science*, en específico en el Open Science Framework (OSF), para los seis países estudiados en el artículo y vienen en formatos csv y dta.
