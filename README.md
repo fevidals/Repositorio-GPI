@@ -29,7 +29,8 @@ En este repositorio vamos a aplicar el protocolo de documentación *Teaching Int
 ## 5. Requisitos Iniciales Identificados
 Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos ténicos y de información:
 
-* **Software:**
+* **Sistemas Operativos:** Windows 11, Mac OS 26.2 o Ubuntu 24.04.4
+* **Software:** The R project (4.5.2), RStudio (2026.01.0) como IDE y Overleaf como editor de texto para LaTeX.
 * **Control de Versiones:** Git (2.53.0) y GitHub Desktop (3.5.4).
 * **Acceso a Datos:**
 * **Librerías/Paquetes:**
