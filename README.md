@@ -35,4 +35,4 @@ Para poder realizar el proceso de replicabilidad del artículo seleccionado, nec
 * **Software:** The R project (4.5.2), RStudio (2026.01.0) como IDE y Overleaf como editor de texto para LaTeX.
 * **Control de Versiones:** Git (2.53.0) y GitHub Desktop (3.5.4).
 * **Acceso a Datos:** los datos originales están disponibles en *The Center for Open Science*, en específico en el Open Science Framework (OSF), para los seis países estudiados en el artículo.
-* **Librerías/Paquetes:**
+* **Librerías/Paquetes:** utilizaremos la librería *renv* para gestionar las dependencias, *dplyr* para la manipulación y transformación de los datos, *ggplot2* para la generación de gráficos y stargazer para exportar las tablas de resultado en formato LaTeX.
