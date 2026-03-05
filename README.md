@@ -8,10 +8,10 @@
 
 | Integrantes | Rol Asignado |
 |--------------|---------------|
-| **Vivian Cabanzo** | Project Manager |
-| **Laura Díaz** | Investigación teórica y revisión de literatura |
-| **Juan Esteban Díaz** | Recolección y gestión de datos |
-| **Fabián Vidal** | Mantenedor del Repositorio en GitHub |
+| **Laura Díaz** | Project Manager: seguimiento del cronograma, organización de reuniones y control de calidad |
+| **Vivian Cabanzo** | Coordinadora de identificación, descargas y preparación de datos. Control de consistencia en las variables |
+| **Juan Esteban Díaz** | Ejecución del código, reproducción de modelos estadísticos y validación de resultados del artículo |
+| **Fabián Vidal** | Mantenedor del Repositorio en GitHub (documentación, README) e integración de los avances |
 
 
 ## 3. Descripción General
