@@ -1,0 +1,24 @@
+# Archivos de entorno y contraseñas
+.env
+.Renviron
+
+# Archivos de datos (para no saturar GitHub)
+*.csv
+*.xlsx
+*.parquet
+/data/
+/datos/
+
+# Archivos basura de Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Archivos basura de R
+.Rhistory
+.RData
+.Ruserdata
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
