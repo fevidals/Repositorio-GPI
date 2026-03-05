@@ -6,7 +6,7 @@ Este documento organiza las actividades del proyecto y se vincula con los issues
 ## Actividades principales
 
 - [ ] 1.1 Requerimientos iniciales del proyecto (Issue: [#1](https://github.com/fevidals/Repositorio-GPI/issues/1))
-- [ ] 1.2 Gestión preliminar del proyecto
+- [ ] 1.2 Gestión preliminar del proyecto (Issue: [#2](https://github.com/fevidals/Repositorio-GPI/issues/2))
 - [ ] 1.3 Configuración del entorno de trabajo
 - [ ] 1.4 Identificación del ejercicio de reproducibilidad
 - [ ] 1.5 Gestión del Avance 1 del proyecto
