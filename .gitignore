@@ -6,7 +6,7 @@
 *.csv
 *.xlsx
 *.parquet
-/data/
+/data/in/
 /datos/
 
 # Archivos basura de Python
