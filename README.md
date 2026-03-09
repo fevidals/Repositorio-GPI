@@ -24,9 +24,12 @@ El repositorio opera bajo una licencia MIT que permite a cualquier persona pueda
 En este repositorio vamos a aplicar el protocolo de documentación *Teaching Integrity in Empirical Research* (**TIER**) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
 
 * **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo.
-* **`/scripts`**: códigos con todo el proceso de limpieza, manipulación de datos y generación de resultados.
-* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
 * **`/documents`**: documentación del proyecto y manuscrito final.
+* **`/renv`**: aseguramiento del entorno de trabajo y gestión de dependencias de R.
+* **`/scripts`**: códigos con todo el proceso de limpieza, manipulación de datos y generación de resultados.
+* **`/seguimiento`**: documentos de gestión del proyecto, incluyendo la Estructura de Desglose del Trabajo (EDT) de replicación.
+* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
+
 
 ## 5. Requisitos Iniciales Identificados
 Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos técnicos y de información:
