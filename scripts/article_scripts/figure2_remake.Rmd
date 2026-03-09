@@ -1,0 +1,171 @@
+---
+title: "figure2_remake"
+author: "Juan Esteban Díaz Torres"
+date: "2026-03-09"
+output: html_document
+---
+
+# 02 Replicación de la figura 2
+
+En este código vamos a replicar la figura 2 del trabajo de [Blair, G. et al (2021)](https://www.science.org/doi/10.1126/science.abd3446)
+
+> Nota: Los bloques (chunks) de código presentados a continuación se tomaron en su mayoría del código *figure2.R* presente en los materiales de replicación provistos por los autores. Para acceder a los materiales haga click [aquí](https://osf.io/xqd3v/overview)
+
+## Alistar ambiente de trabajo
+
+### 1. Limpiar ambiente de trabajo y borrar consola
+
+```{r pressure, echo=FALSE}
+rm(list = ls())
+cat("\014")
+options(scipen=999) #Apagar notación científica 
+```
+
+### 2. Cargar paquetes necesarios
+
+Para reproducir la figura 1 pudimos cargar los paquetes utilizados por los autores originalmente. Estos paquetes se listan a continuación.
+
+```{r, echo=FALSE}
+
+library(pacman) #Poner un condicional que descargue el paquete
+
+p_load(
+  tidyverse, #Análisis de datos
+  showtext, #Permite cambiar la fuente de las palabras 
+  patchwork, #Organizar múltiples gráficos
+  extrafont, #Ayuda a guardar imágenes en pdf
+  here #Referenciar archivos fácil 
+) 
+
+```
+
+### 3. Cargar fuentes y temas adicionales 
+
+```{r}
+#Tema personalizado para hacer la figura
+source(here("scripts", "article_scripts", "helper_functions_and_themes", "0-mkiv-theme.R"))
+
+#Agregar fuentes para el texto
+font_add("Helvetica Neue Medium", "/System/Library/Fonts/HelveticaNeue.ttc")
+font_add("Courier", "/System/Library/Fonts/Courier.dfont")
+```
+
+## Cargar datos
+
+A continuación vamos a cargar las tablas de datos que contienen los resultados estimados a partir del análisis realizado por los autores:
+
+-   **meta_estimates_main_hypotheses**: contiene los efectos estimados del trátamiento con sus respectivos intervalos de confianza, p-valores y otras medidas de significancia estadística de los efectos para las dimensiones de interés.
+
+    > Intuición: efectos del trámiento sobre las dimensiones de interés
+
+-   **secondary_hypotheses**: contiene la segunda hipótesis de los autores para la dimensión de *crimen*, que se obtuvo con otros datos alternativos.
+
+```{r}
+
+#Cargar la hipótesis principal 
+meta_estimates_main_hypotheses <- readRDS(here("data", "out", "meta-estimates-main-hypotheses.RDS"))
+
+#Cargar la hipótesis secundaria para la dimensión de crimen 
+secondary_hypotheses <- readRDS(here("data", "out", "meta-estimates-secondary-hypotheses.RDS")) %>% 
+  filter(label %in% c("Crime victimization idx. (administrative data)"))
+
+
+```
+
+## Replicar la figura 2
+
+1.  Alistar la tabla de datos para hacer la figura
+
+```{r}
+fig1_df <- 
+  meta_estimates_main_hypotheses %>%
+  filter(hypothesis != "C") %>%
+  mutate(label = str_replace(label, " idx.", "")) %>%
+  mutate(type = case_when(
+    str_starts(hypothesis, "M") == TRUE ~ "mechanism",
+    str_starts(hypothesis, "S") == TRUE ~ "secondary",
+    TRUE ~ "primary"),
+    type = factor(type, 
+                  levels = c("primary", "mechanism", "secondary"),
+                  labels = c("Primary Outcomes", "Mechanisms", "Secondary")),
+    label = forcats::fct_reorder(as.factor(label), 
+                                 as.numeric(as.factor(hypothesis)), .desc = TRUE)) %>% 
+  # prepare p-values for printing
+  mutate(
+    est_print = format(round(estimate, 3), digits = 3),
+    se_print = format(round(std.error, 2), digits = 2),
+    p_print = format(round(p.value, 2), digits = 2),
+    p.adj_print = if_else(is.na(p.value.adj), "", as.character(format(round(p.value.adj, 2), digits = 2)))
+  )
+```
+
+2.  Graficar los efectos estimados con sus respectivos intervalos de cofianza
+
+```{r}
+p <- 
+  fig1_df %>% 
+  ggplot(aes(estimate, label, group = "hypothesis")) +
+  mkiv_theme() +
+  geom_vline(xintercept = 0, lty = 2, lwd = .5, colour = "black") +
+  geom_errorbarh(
+    aes(xmin = conf.low, xmax = conf.high), 
+    height = 0.1, position = position_dodge(width = 0.3), 
+    colour = "black", na.rm = TRUE
+  ) +
+  labs(y = "", x = "Estimated treatment effect with 95% confidence intervals") +
+  geom_point(
+    size = 2, pch = 23, fill = "black", 
+    position = position_dodge(width = 1), colour = "black", na.rm = TRUE
+  ) +
+  facet_grid(type ~ ., switch = "y", scales = "free", space = "free") +
+  geom_hline(yintercept = -Inf, color = "white", size = 6) +
+  theme(
+    strip.text.y = element_text(angle = -90),
+    plot.margin = margin(l = -0.5, t = 0, b = 0.5, r = 0.5, unit = "lines"),
+    axis.title.x = element_text(size = 8, vjust = -1.5),
+    panel.grid.minor.y = element_blank()
+  )
+```
+
+3.  Hacer una tabla con los efectos estimados, sus intervalos de confianza y medidas de significancia estadística de los efectos para las dimensiones de interés
+
+```{r}
+p2 <- 
+  fig1_df %>% 
+  ggplot(aes(estimate, label, group = "hypothesis")) +
+  mkiv_theme() +
+  labs(x = "", y = "") +
+  geom_text(aes(label = est_print), 
+            family = "Helvetica Neue Medium", x = -0.2, size = 2.625, hjust = 0, show.legend = FALSE) +
+  geom_text(aes(label = se_print), 
+            family = "Helvetica Neue Medium", x = 0.2, size = 2.625, hjust = 0, show.legend = FALSE) +
+  geom_text(aes(label = p_print), 
+            family = "Helvetica Neue Medium", x = 0.55, size = 2.625, hjust = 0, show.legend = FALSE) +
+  geom_text(aes(label = p.adj_print), 
+            family = "Helvetica Neue Medium", x = 0.9, size = 2.625, hjust = 0, show.legend = FALSE) +
+  coord_cartesian(clip = "off") +
+  facet_grid(type ~ ., switch = "y", scales = "free", space = "free") +
+  labs(title = "Est.     S.E.      p      Adj. p", x = "", y = "", color = "", shape = "")+
+  theme(
+    plot.margin = margin(l = -0.5, t = 0, b = 0.5, r = 0.5, unit = "lines"),
+    axis.title.x = element_text(vjust = -1.5),
+    strip.text.y = element_blank(),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    axis.text.y = element_blank(),
+    plot.title = element_text(size = 8, hjust = 0.5)
+  )
+```
+
+4.  Juntar la gráfica de los intervalos de confianza con la tabla de los efectos estimados y las medidas de significancia estadística
+
+```{r}
+gg <- p + p2 + plot_layout(widths = c(.7, .3))
+```
+
+## Guardar la figura replicada 
+
+```{r}
+ggsave(gg, height = 5.5, width = 6.5, filename = here("views", "figura2_blair_2021.jpg"))
+
+```
