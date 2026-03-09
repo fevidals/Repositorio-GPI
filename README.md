@@ -24,9 +24,15 @@ El repositorio opera bajo una licencia MIT que permite a cualquier persona pueda
 En este repositorio vamos a aplicar el protocolo de documentación *Teaching Integrity in Empirical Research* (**TIER**) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
 
 * **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo.
-* **`/scripts`**: códigos con todo el proceso de limpieza, manipulación de datos y generación de resultados.
-* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
 * **`/documents`**: documentación del proyecto y manuscrito final.
+* **`/renv`**: aseguramiento del entorno de trabajo y gestión de dependencias de R.
+* **`/scripts`**: códigos con todo el proceso computacional de la replicación, divididos en:
+  * **`/prep_scripts`**: scripts relacionados al procesamiento y limpieza para generar los datos procesados.
+  * **`/article_scripts`**: códigos utilizados específicamente para generar las tablas y gráficos del artículo.
+  * **`/helper_functions_and_themes`**: funciones auxiliares y estandarización de temas visuales para el proyecto.
+* **`/seguimiento`**: documentos de gestión del proyecto, incluyendo la Estructura de Desglose del Trabajo (EDT) de replicación.
+* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
+
 
 ## 5. Requisitos Iniciales Identificados
 Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos técnicos y de información:
@@ -35,4 +41,4 @@ Para poder realizar el proceso de replicabilidad del artículo seleccionado, nec
 * **Software:** The R project (4.5.2), RStudio (2026.01.0) como IDE y Overleaf como editor de texto para LaTeX.
 * **Control de Versiones:** Git (2.53.0) y GitHub Desktop (3.5.4).
 * **Acceso a Datos:** los datos originales están disponibles en *The Center for Open Science*, en específico en el Open Science Framework (OSF), para los seis países estudiados en el artículo y vienen en formatos csv y dta.
-* **Librerías/Paquetes:** utilizaremos la librería `renv` para gestionar las dependencias, `readr` para leer las bases en csv y `readstata13` para los formatos dta, `dplyr` para la manipulación y transformación de los datos, `ggplot2` para la generación de gráficos y `stargazer` para exportar las tablas de resultado en formato LaTeX.
+* **Librerías/Paquetes (R):** La gestión de dependencias y aislamiento del entorno se realizará mediante `renv`. Para la lectura de datos, manipulación, modelado espacial/estadístico y visualización, se requerirán las siguientes librerías: `blockTools`, `colorout`, `DeclareDesign`, `dplyr`, `FNN`, `foreign`, `glue`, `gt`, `haven`, `Hmisc`, `kableExtra`, `lmtest`, `lubridate`, `metafor`, `nnet`, `ogrDrivers`, `ogrInfo`, `patchwork`, `randomizr`, `RANN`, `readOGR`, `readstata13`, `readxl`, `rgdal`, `ri2`, `RItools`, `sf`, `showtext`, `sp`, `stargazer`, `stdidx` y `tidyverse`.
