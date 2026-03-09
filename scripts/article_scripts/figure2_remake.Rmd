@@ -1,6 +1,5 @@
 ---
 title: "figure2_remake"
-author: "Juan Esteban Díaz Torres"
 date: "2026-03-09"
 output: html_document
 ---
@@ -18,7 +17,6 @@ En este código vamos a replicar la figura 2 del trabajo de [Blair, G. et al (20
 ```{r pressure, echo=FALSE}
 rm(list = ls())
 cat("\014")
-options(scipen=999) #Apagar notación científica 
 ```
 
 ### 2. Cargar paquetes necesarios
@@ -33,21 +31,23 @@ p_load(
   tidyverse, #Análisis de datos
   showtext, #Permite cambiar la fuente de las palabras 
   patchwork, #Organizar múltiples gráficos
-  extrafont, #Ayuda a guardar imágenes en pdf
   here #Referenciar archivos fácil 
 ) 
 
 ```
 
-### 3. Cargar fuentes y temas adicionales 
+### 3. Cargar tema personalizado para hacer el gráfico 
+
+Origianlmente los autores utilizaron las fuentes *Helvetica Neue Medium* y *Courier* para hacer la figura 2. Estas dos fuentes son exclusivas de MacOS y no están presentes en otros sistemas operativos. Para facilitar la reproducción de la figura por personas que usan otros sistemas operativos vamos a cambiar las fuentes por *Sans*.
 
 ```{r}
 #Tema personalizado para hacer la figura
 source(here("scripts", "article_scripts", "helper_functions_and_themes", "0-mkiv-theme.R"))
 
 #Agregar fuentes para el texto
-font_add("Helvetica Neue Medium", "/System/Library/Fonts/HelveticaNeue.ttc")
-font_add("Courier", "/System/Library/Fonts/Courier.dfont")
+
+#font_add("Helvetica Neue Medium", "/System/Library/Fonts/HelveticaNeue.ttc")
+#font_add("Courier", "/System/Library/Fonts/Courier.dfont")
 ```
 
 ## Cargar datos
@@ -68,6 +68,12 @@ meta_estimates_main_hypotheses <- readRDS(here("data", "out", "meta-estimates-ma
 #Cargar la hipótesis secundaria para la dimensión de crimen 
 secondary_hypotheses <- readRDS(here("data", "out", "meta-estimates-secondary-hypotheses.RDS")) %>% 
   filter(label %in% c("Crime victimization idx. (administrative data)"))
+
+#Agregar los datos la hipótesis secundaria a la tabla que tienes las demas 
+meta_estimates_main_hypotheses <- 
+  filter(meta_estimates_main_hypotheses, hypothesis == "1a") %>% 
+  bind_rows(secondary_hypotheses) %>% 
+  bind_rows(filter(meta_estimates_main_hypotheses, hypothesis != "1a"))
 
 
 ```
@@ -135,17 +141,18 @@ p2 <-
   ggplot(aes(estimate, label, group = "hypothesis")) +
   mkiv_theme() +
   labs(x = "", y = "") +
+  # Using family = "sans" for cross-platform compatibility
   geom_text(aes(label = est_print), 
-            family = "Helvetica Neue Medium", x = -0.2, size = 2.625, hjust = 0, show.legend = FALSE) +
+            family = "sans", x = -0.2, size = 2.625, hjust = 0, show.legend = FALSE) +
   geom_text(aes(label = se_print), 
-            family = "Helvetica Neue Medium", x = 0.2, size = 2.625, hjust = 0, show.legend = FALSE) +
+            family = "sans", x = 0.2, size = 2.625, hjust = 0, show.legend = FALSE) +
   geom_text(aes(label = p_print), 
-            family = "Helvetica Neue Medium", x = 0.55, size = 2.625, hjust = 0, show.legend = FALSE) +
+            family = "sans", x = 0.55, size = 2.625, hjust = 0, show.legend = FALSE) +
   geom_text(aes(label = p.adj_print), 
-            family = "Helvetica Neue Medium", x = 0.9, size = 2.625, hjust = 0, show.legend = FALSE) +
+            family = "sans", x = 0.9, size = 2.625, hjust = 0, show.legend = FALSE) +
   coord_cartesian(clip = "off") +
   facet_grid(type ~ ., switch = "y", scales = "free", space = "free") +
-  labs(title = "Est.     S.E.      p      Adj. p", x = "", y = "", color = "", shape = "")+
+  labs(title = "Est.     S.E.      p      Adj. p", x = "", y = "", color = "", shape = "") +
   theme(
     plot.margin = margin(l = -0.5, t = 0, b = 0.5, r = 0.5, unit = "lines"),
     axis.title.x = element_text(vjust = -1.5),
@@ -153,7 +160,9 @@ p2 <-
     panel.grid.major.y = element_blank(),
     panel.grid.minor.y = element_blank(),
     axis.text.y = element_blank(),
-    plot.title = element_text(size = 8, hjust = 0.5)
+    # Ensuring title also uses the compatible font
+    plot.title = element_text(family = "sans", size = 8, hjust = 0.5),
+    text = element_text(family = "sans")
   )
 ```
 
@@ -163,7 +172,7 @@ p2 <-
 gg <- p + p2 + plot_layout(widths = c(.7, .3))
 ```
 
-## Guardar la figura replicada 
+## Guardar la figura replicada
 
 ```{r}
 ggsave(gg, height = 5.5, width = 6.5, filename = here("views", "figura2_blair_2021.jpg"))
