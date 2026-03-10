@@ -100,3 +100,8 @@ El proyecto de replicación incluye una infraestructura automatizada dividida en
 **Archivos en la raíz del proyecto:**
 * **`.Rprofile`**: Archivo oculto que R lee automáticamente al iniciar la sesión. Su función es disparar el script de activación antes de cargar cualquier otra configuración del usuario.
 * **`renv.lock`**: Es el "inventario" principal. Un archivo en formato JSON que registra las versiones exactas, dependencias y los repositorios de origen de los 141 paquetes necesarios para ejecutar los *scripts* del proyecto.
+
+**Archivos dentro del directorio `/renv`:**
+* **`activate.R`**: es el motor de arranque del entorno. En case de que un usuario clone el repositorio y no tenga `renv` instalado en su máquina, este script se encarga de descargarlo y configurarlo en segundo plano, interceptando las rutas del sistema para que las librerías se instalen de forma aislada.
+* **`.gitignore`**: archivo de control de versiones interno de `renv` cuya función es indicarle a Git que ignore la subcarpeta local donde se descargan los binarios pesados de los paquetes.
+* **`settings.json`**: Archivo de configuración que guarda las preferencias específicas del entorno de `renv` para este proyecto.
