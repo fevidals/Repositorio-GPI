@@ -82,7 +82,7 @@ Para garantizar la reproducibilidad computacional del artículo original, se req
 | `colorout` | Personalización de colores en la salida de la consola. |
 
 
-## 7. Localización y acceso a datos crudos
+## 7. Localización y acceso a los datos procesados
 Los microdatos procesados utilizados por los autores también son de acceso totalmente abierto. El repositorio oficial que contiene las encuestas anonimizadas y la documentación primaria puede ser consultado en el **Open Science Framework (OSF)** a través del siguiente enlace: [OSF - Community Policing Data](https://osf.io/2juyz/overview).
 
 Para facilitar la ejecución de los códigos y garantizar la reproducibilidad autónoma de este proyecto, una copia estática de estas bases de datos (en formato `.RDS`) ha sido alojada directamente en este repositorio dentro del directorio `data/out`. 
