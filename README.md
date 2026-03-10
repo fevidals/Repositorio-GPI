@@ -20,18 +20,36 @@ El objetivo del proyecto es lograr la replicabilidad de los resultados presentad
 **Licencia:**
 El repositorio opera bajo una licencia MIT que permite a cualquier persona pueda distribuir, modificar y usar comercialmente los códigos alojados aquí, sin embargo, estos deben nombrar a los autores y el software se entrega sin garantía alguna.
 
-## 4. Estructura de Directorios
+## 4. Estructura de Directorios y Flujo de Trabajo
 En este repositorio vamos a aplicar el protocolo de documentación *Teaching Integrity in Empirical Research* (**TIER**) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
 
-* **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo.
-* **`/documents`**: documentación del proyecto y manuscrito final.
-* **`/renv`**: aseguramiento del entorno de trabajo y gestión de dependencias de R.
-* **`/scripts`**: códigos con todo el proceso computacional de la replicación, divididos en:
-  * **`/prep_scripts`**: scripts relacionados al procesamiento y limpieza para generar los datos procesados.
-  * **`/article_scripts`**: códigos utilizados específicamente para generar las tablas y gráficos del artículo.
-  * **`/helper_functions_and_themes`**: funciones auxiliares y estandarización de temas visuales para el proyecto.
-* **`/seguimiento`**: documentos de gestión del proyecto, incluyendo la Estructura de Desglose del Trabajo (EDT) de replicación.
-* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
+A continuación se presenta la estructura exacta del repositorio:
+
+```text
+Repositorio-GPI/
+├── .Rprofile                  # activa renv automáticamente
+├── renv.lock                  # 141 paquetes congelados
+├── renv/
+│   └── activate.R             # inicialización del entorno
+├── code/
+│   ├── article_scripts/
+│   │   ├── figure2.R          # script principal
+│   │   ├── figure2-repro.R    # versión adaptada Windows
+│   │   └── 0-mkiv-theme.R     # tema visual
+│   ├── meta-analysis/
+│   │   ├── 0-variable-labels.R   # Organizar labels
+│   │   ├── 1-prep-estimates.R    # Preparación de estimadores
+│   │   └── 2-meta-analysis.R     # Meta análisis
+│   └── install-packages.R        # Paquetes necesarios
+├── data/
+│   ├── out/                   # Archivos necesarios para figura 2
+│   │   ├── meta-estimates-main-hypotheses.RDS
+│   │   └── meta-estimates-secondary-hypotheses.RDS
+│   └── otros_archivos/        # resto de datos RDS
+├── figures/                   # Salidas finales de la replicación, tablas y gráficos
+├── seguimiento/
+│   └── EDT.md                 # Estructura de Desglose del Trabajo
+└── documents/                 # Documentación del proyecto y manuscrito final
 
 
 ## 5. Requisitos Iniciales Identificados
