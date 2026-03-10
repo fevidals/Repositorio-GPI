@@ -23,6 +23,16 @@ El repositorio opera bajo una licencia MIT que permite a cualquier persona pueda
 ## 4. Estructura de Directorios y Flujo de Trabajo
 En este repositorio vamos a aplicar el protocolo de documentación *Teaching Integrity in Empirical Research* (**TIER**) para la organización de archivos en investigación cuantitativa que facilite la replicabilidad del trabajo. 
 
+* **`/data`**: contiene los archivos originales (Raw Data) y los datos procesados en la replicabilidad del trabajo. 
+* **`/documents`**: documentación del proyecto y manuscrito final. 
+* **`/renv`**: aseguramiento del entorno de trabajo y gestión de dependencias de R. 
+* **`/scripts`**: códigos con todo el proceso computacional de la replicación, divididos en: 
+  * **`/prep_scripts`**: scripts relacionados al procesamiento y limpieza para generar los datos procesados. 
+  * **`/article_scripts`**: códigos utilizados específicamente para generar las tablas y gráficos del artículo. 
+  * **`/helper_functions_and_themes`**: funciones auxiliares y estandarización de temas visuales para el proyecto. 
+* **`/seguimiento`**: documentos de gestión del proyecto, incluyendo la Estructura de Desglose del Trabajo (EDT) de replicación. 
+* **`/views`**: salidas finales de la replicación, tablas y Gráficos, que van a ser comparadas con los resultados del paper original.
+
 A continuación se presenta la estructura exacta del repositorio:
 
 ```text
