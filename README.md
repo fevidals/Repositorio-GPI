@@ -50,14 +50,14 @@ Para garantizar la reproducibilidad computacional del artículo original, se req
 | Nombre del Paquete | Función |
 | :--- | :--- |
 | **Manipulación y Limpieza de Datos** | |
-| `tidyverse`, `dplyr` | Manipulación, limpieza y visualización de datos. |
-| `fastDummies` | Creación eficiente de variables dicotómicas. |
-| `lubridate` | Manejo simplificado de fechas y horas. |
+| `tidyverse`, `dplyr` | Manipulación y limpieza de datos. |
+| `fastDummies` | Creación de variables dummy. |
+| `lubridate` | Manejo fechas. |
 | `stdidx` | Estandarización de índices. |
 | **Importación y Exportación de Archivos** | |
-| `haven` | Importación de datos en formatos externos (Stata, SPSS). |
-| `readxl` | Importación de archivos de datos desde Excel. |
-| `foreign`, `readstata13` | Lectura de bases de datos de otros software estadísticos. |
+| `haven` | Importación de datos en formatos externos (Stata). |
+| `readxl` | Importación de archivos de datos desde Excel (xlsx). |
+| `foreign`, `readstata13` | Lectura de bases de datos de otros software estadísticos como dta. |
 | **Estadística y Econometría** | |
 | `lmtest` | Pruebas de diagnóstico para modelos lineales. |
 | `metafor` | Realización de metanálisis y modelos de efectos. |
@@ -93,3 +93,10 @@ Para poder garantizar la reproducibilidad exacta de los resultados y evitar conf
 
 El ambiente de R fue inicializado con `renv::init()` en la raíz del proyecto, lo que creó automáticamente los archivos `.Rprofile` y `renv/activate.R`. La instalación de los 31 paquetes requeridos (más sus dependencias, generando un total de 141 entradas) fue congelada mediante `renv::snapshot()` dentro del archivo `renv.lock`.
 
+### 8.1. Arquitectura de Reproducibilidad (`renv`)
+
+El proyecto de replicación incluye una infraestructura automatizada dividida en la raíz del repositorio y el directorio interno `/renv`:
+
+**Archivos en la raíz del proyecto:**
+* **`.Rprofile`**: Archivo oculto que R lee automáticamente al iniciar la sesión. Su función es disparar el script de activación antes de cargar cualquier otra configuración del usuario.
+* **`renv.lock`**: Es el "inventario" principal. Un archivo en formato JSON que registra las versiones exactas, dependencias y los repositorios de origen de los 141 paquetes necesarios para ejecutar los *scripts* del proyecto.
