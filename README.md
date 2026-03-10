@@ -50,7 +50,7 @@ Repositorio-GPI/
 ├── seguimiento/
 │   └── EDT.md                 # Estructura de Desglose del Trabajo
 └── documents/                 # Documentación del proyecto y manuscrito final
-
+```text
 
 ## 5. Requisitos Iniciales Identificados
 Para poder realizar el proceso de replicabilidad del artículo seleccionado, necesitamos los siguientes requerimientos técnicos y de información:
