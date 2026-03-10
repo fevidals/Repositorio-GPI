@@ -44,10 +44,6 @@ Origianlmente los autores utilizaron las fuentes *Helvetica Neue Medium* y *Cour
 #Tema personalizado para hacer la figura
 source(here("scripts", "article_scripts", "helper_functions_and_themes", "0-mkiv-theme.R"))
 
-#Agregar fuentes para el texto
-
-#font_add("Helvetica Neue Medium", "/System/Library/Fonts/HelveticaNeue.ttc")
-#font_add("Courier", "/System/Library/Fonts/Courier.dfont")
 ```
 
 ## Cargar datos
