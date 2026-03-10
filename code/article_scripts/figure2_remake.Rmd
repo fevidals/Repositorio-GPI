@@ -171,6 +171,6 @@ gg <- p + p2 + plot_layout(widths = c(.7, .3))
 ## Guardar la figura replicada
 
 ```{r}
-ggsave(gg, height = 5.5, width = 6.5, filename = here("views", "figura2_blair_2021.jpg"))
+ggsave(gg, height = 5.5, width = 6.5, filename = here("figures", "figura2_blair_2021.jpg"))
 
 ```
