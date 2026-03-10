@@ -42,3 +42,22 @@ Para poder realizar el proceso de replicabilidad del artículo seleccionado, nec
 * **Control de Versiones:** Git (2.53.0) y GitHub Desktop (3.5.4).
 * **Acceso a Datos:** los datos originales están disponibles en *The Center for Open Science*, en específico en el Open Science Framework (OSF), para los seis países estudiados en el artículo y vienen en formatos csv y dta.
 * **Librerías/Paquetes (R):** La gestión de dependencias y aislamiento del entorno se realizará mediante `renv`. Para la lectura de datos, manipulación, modelado espacial/estadístico y visualización, se requerirán las siguientes librerías: `blockTools`, `colorout`, `DeclareDesign`, `dplyr`, `FNN`, `foreign`, `glue`, `gt`, `haven`, `Hmisc`, `kableExtra`, `lmtest`, `lubridate`, `metafor`, `nnet`, `ogrDrivers`, `ogrInfo`, `patchwork`, `randomizr`, `RANN`, `readOGR`, `readstata13`, `readxl`, `rgdal`, `ri2`, `RItools`, `sf`, `showtext`, `sp`, `stargazer`, `stdidx` y `tidyverse`.
+
+## 6. Requerimientos de Software (Librerías)
+
+Para garantizar la reproducibilidad computacional del artículo original, se requiere la instalación de diversos paquetes en R. Para mayor claridad, los hemos clasificado según su propósito dentro del flujo de análisis:
+
+* **Manipulación y Limpieza de Datos:**
+  `dplyr`, `tidyverse`, `lubridate`, `stdidx`
+* **Importación y Exportación de Archivos:**
+  `foreign`, `haven`, `readstata13`, `readxl`
+* **Estadística y Econometría:**
+  `lmtest`, `metafor` (meta-análisis), `nnet` (redes neuronales/modelos multinomiales), `FNN`, `RANN`, `Hmisc`
+* **Diseño Experimental y Aleatorización:**
+  `blockTools`, `DeclareDesign`, `randomizr`, `ri2`, `RItools`
+* **Análisis de Datos Espaciales (GIS):**
+  `ogrDrivers`, `ogrInfo`, `readOGR`, `rgdal`, `sf`, `sp`
+* **Visualización de Datos y Formateo de Tablas:**
+  `colorout`, `glue`, `gt`, `kableExtra`, `patchwork`, `showtext`, `stargazer`
+
+
