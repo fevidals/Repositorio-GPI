@@ -30,7 +30,9 @@ Repositorio-GPI/
 ├── .Rprofile                  # activa renv automáticamente
 ├── renv.lock                  # 141 paquetes congelados
 ├── renv/
-│   └── activate.R             # inicialización del entorno
+│   ├── .gitignore             # ignora binarios pesados
+│   ├── activate.R             # inicialización del entorno
+│   └── settings.json          # configuración de renv
 ├── code/
 │   ├── article_scripts/
 │   │   ├── figure2.R          # script principal
@@ -46,10 +48,11 @@ Repositorio-GPI/
 │   │   ├── meta-estimates-main-hypotheses.RDS
 │   │   └── meta-estimates-secondary-hypotheses.RDS
 │   └── otros_archivos/        # resto de datos RDS
-├── figures/                   # Salidas finales de la replicación, tablas y gráficos
+├── documents/                 # Documentación del proyecto y manuscrito final
+├── figures/                   # Gráficos y visualizaciones generadas
 ├── seguimiento/
 │   └── EDT.md                 # Estructura de Desglose del Trabajo
-└── documents/                 # Documentación del proyecto y manuscrito final
+└── views/                     # Salidas finales de replicación y tablas comparativas
 ```
 
 ## 5. Requisitos Iniciales Identificados
