@@ -26,7 +26,10 @@ cran_packages <- c(
   "sf",
   "showtext",
   "sp",
-  "tidyverse"
+  "tidyverse", 
+  "fastDummies", 
+  "broom", 
+  "here"
 )
 
 install.packages(cran_packages, repos = "https://cran.rstudio.com/")
