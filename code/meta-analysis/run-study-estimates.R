@@ -11,12 +11,12 @@ cat("\n--- Iniciando Ejecución Global de Países ---\n")
 # 2. Definir la lista de scripts a ejecutar
 # Usamos una lista nombrada para que los mensajes en consola sean claros
 scripts_paises <- list(
-  "Brasil"      = here("code", "brazil", "run_brasil.R"),
-  "Colombia"    = here("code", "colombia", "run_colombia.R"),
-  "Liberia"     = here("code", "liberia", "run_liberia.R"),
-  "Pakistán"    = here("code", "pakistan", "run_pakistan.R"),
-  "Filipinas"   = here("code", "philippines", "run_philippines.R"),
-  "Uganda"      = here("code", "uganda", "run_uganda.R")
+  "Brasil"      = here("code", "brazil", "run-brazil.R"),
+  "Colombia"    = here("code", "colombia", "run-colombia.R"),
+  "Liberia"     = here("code", "liberia", "run-liberia.R"),
+  "Pakistán"    = here("code", "pakistan", "run-pakistan.R"),
+  "Filipinas"   = here("code", "philippines", "run-phillippines.R"),
+  "Uganda"      = here("code", "uganda", "run-uganda.R")
 )
 
 # 3. Ejecución iterativa con manejo de errores
