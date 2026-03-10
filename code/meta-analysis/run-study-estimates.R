@@ -6,6 +6,10 @@
 if (!require("pacman")) install.packages("pacman")
 pacman::p_load(rmarkdown, here, tidyverse)
 
+
+cat("\n--- Cargar paquetes necesarios ---\n")
+source(here("code", "install-packages.R"))
+
 cat("\n--- Iniciando Ejecución Global de Países ---\n")
 
 # 2. Definir la lista de scripts a ejecutar

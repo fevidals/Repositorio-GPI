@@ -36,7 +36,7 @@ install.packages(cran_packages, repos = "https://cran.rstudio.com/")
 
 # stdidx viene de GitHub (no está en CRAN)
 if (!require("remotes")) install.packages("remotes")
-remotes::install_github("sdouglas/stdidx")
+remotes::install_github("graemeblair/stdidx")
 
 # colorout solo funciona en Mac/Linux, en Windows lo saltamos
 # rgdal fue retirado de CRAN, usamos sf como reemplazo moderno
