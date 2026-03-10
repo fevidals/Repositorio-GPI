@@ -33,11 +33,11 @@ for (nombre_pais in names(scripts_paises)) {
     # local = FALSE asegura que los objetos se guarden en el Global Env si es necesario
     source(ruta, local = FALSE, encoding = "UTF-8")
     
-    cat(paste0("✅ ", nombre_pais, " completado con éxito.\n"))
+    cat(paste0("ok ", nombre_pais, " completado con éxito.\n"))
     resultados[[nombre_pais]] <- "Éxito"
     
   }, error = function(e) {
-    cat(paste0("❌ ERROR en ", nombre_pais, ":\n"), e$message, "\n")
+    cat(paste0("no ERROR en ", nombre_pais, ":\n"), e$message, "\n")
     resultados[[nombre_pais]] <- paste("Error:", e$message)
   })
 }
