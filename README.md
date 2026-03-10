@@ -82,8 +82,14 @@ Para garantizar la reproducibilidad computacional del artículo original, se req
 | `colorout` | Personalización de colores en la salida de la consola. |
 
 
-## 7. Localización y acceso a los datos procesados
+## 7. Localización y acceso de los datos procesados
 Los microdatos procesados utilizados por los autores también son de acceso totalmente abierto. El repositorio oficial que contiene las encuestas anonimizadas y la documentación primaria puede ser consultado en el **Open Science Framework (OSF)** a través del siguiente enlace: [OSF - Community Policing Data](https://osf.io/2juyz/overview).
 
 Para facilitar la ejecución de los códigos y garantizar la reproducibilidad autónoma de este proyecto, una copia estática de estas bases de datos (en formato `.RDS`) ha sido alojada directamente en este repositorio dentro del directorio `data/out`. 
+
+## 8. Restauración del Entorno de Trabajo (`renv`)
+
+Para poder garantizar la reproducibilidad exacta de los resultados y evitar conflictos de versiones, software o librerías, utilizamos el gestor de paquetes `renv`. 
+
+El ambiente de R fue inicializado con `renv::init()` en la raíz del proyecto, lo que creó automáticamente los archivos `.Rprofile` y `renv/activate.R`. La instalación de los 31 paquetes requeridos (más sus dependencias, generando un total de 141 entradas) fue congelada mediante `renv::snapshot()` dentro del archivo `renv.lock`.
 
