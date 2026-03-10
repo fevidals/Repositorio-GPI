@@ -45,19 +45,45 @@ Para poder realizar el proceso de replicabilidad del artículo seleccionado, nec
 
 ## 6. Requerimientos de Software (Librerías)
 
-Para garantizar la reproducibilidad computacional del artículo original, se requiere la instalación de diversos paquetes en R. Para mayor claridad, los hemos clasificado según su propósito dentro del flujo de análisis:
+Para garantizar la reproducibilidad computacional del artículo original, se requiere la instalación de diversos paquetes en R. A continuación se detallan y clasifican según su propósito dentro del flujo de análisis:
 
-* **Manipulación y Limpieza de Datos:**
-  `dplyr`, `tidyverse`, `lubridate`, `stdidx`
-* **Importación y Exportación de Archivos:**
-  `foreign`, `haven`, `readstata13`, `readxl`
-* **Estadística y Econometría:**
-  `lmtest`, `metafor` (meta-análisis), `nnet` (redes neuronales/modelos multinomiales), `FNN`, `RANN`, `Hmisc`
-* **Diseño Experimental y Aleatorización:**
-  `blockTools`, `DeclareDesign`, `randomizr`, `ri2`, `RItools`
-* **Análisis de Datos Espaciales (GIS):**
-  `ogrDrivers`, `ogrInfo`, `readOGR`, `rgdal`, `sf`, `sp`
-* **Visualización de Datos y Formateo de Tablas:**
-  `colorout`, `glue`, `gt`, `kableExtra`, `patchwork`, `showtext`, `stargazer`
+| Nombre del Paquete | Función |
+| :--- | :--- |
+| **Manipulación y Limpieza de Datos** | |
+| `tidyverse`, `dplyr` | Manipulación, limpieza y visualización de datos. |
+| `fastDummies` | Creación eficiente de variables dicotómicas. |
+| `lubridate` | Manejo simplificado de fechas y horas. |
+| `stdidx` | Estandarización de índices. |
+| **Importación y Exportación de Archivos** | |
+| `haven` | Importación de datos en formatos externos (Stata, SPSS). |
+| `readxl` | Importación de archivos de datos desde Excel. |
+| `foreign`, `readstata13` | Lectura de bases de datos de otros software estadísticos. |
+| **Estadística y Econometría** | |
+| `lmtest` | Pruebas de diagnóstico para modelos lineales. |
+| `metafor` | Realización de metanálisis y modelos de efectos. |
+| `nnet` | Modelos de regresión logística multinomial. |
+| `FNN`, `RANN` | Algoritmos de búsqueda de vecinos más cercanos. |
+| `Hmisc` | Funciones misceláneas para análisis de datos y estadísticas. |
+| **Diseño Experimental y Aleatorización** | |
+| `DeclareDesign` | Diagnóstico y simulación de diseños de investigación. |
+| `ri2` | Ejecución de inferencia de aleatorización. |
+| `blockTools`, `randomizr`, `RItools`| Asignación aleatoria y bloqueo de tratamientos. |
+| **Análisis de Datos Espaciales (GIS)** | |
+| `sf`, `sp` | Manejo y análisis de datos geográficos. |
+| `rgdal`, `readOGR` | Lectura y proyección de datos vectoriales y mapas. |
+| `ogrDrivers`, `ogrInfo` | Exploración de controladores y metadatos espaciales. |
+| **Visualización y Formateo de Tablas** | |
+| `gt` | Generación de tablas de presentación de alta calidad. |
+| `kableExtra` | Personalización avanzada de tablas profesionales. |
+| `stargazer` | Exportación estructurada de tablas de regresión a LaTeX. |
+| `patchwork` | Composición de múltiples gráficos en una sola imagen. |
+| `showtext` | Gestión de fuentes y tipografía en gráficos. |
+| `glue` | Formateo dinámico de cadenas de texto. |
+| `colorout` | Personalización de colores en la salida de la consola. |
 
+
+## 7. Localización y acceso a datos crudos
+Los microdatos procesados utilizados por los autores también son de acceso totalmente abierto. El repositorio oficial que contiene las encuestas anonimizadas y la documentación primaria puede ser consultado en el **Open Science Framework (OSF)** a través del siguiente enlace: [OSF - Community Policing Data](https://osf.io/2juyz/overview).
+
+Para facilitar la ejecución de los códigos y garantizar la reproducibilidad autónoma de este proyecto, una copia estática de estas bases de datos (en formato `.RDS`) ha sido alojada directamente en este repositorio dentro del directorio `data/out`. 
 
