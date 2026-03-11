@@ -4,6 +4,9 @@
 ## 1. Paper Seleccionado
 **Título original:** *"Community Policing does not build citizen trust in police or reduce crime in the Global South"*
 
+**Contexto del Estudio:**
+El artículo examina si la estrategia de "policía comunitaria" (patrullajes a pie, reuniones comunitarias y resolución de problemas) logra aumentar la confianza ciudadana, la cooperación o reducir el crimen. A través de seis experimentos de campo coordinados en Brasil, Colombia, Liberia, Pakistán, Filipinas y Uganda, cubriendo a unos 9 millones de personas, el estudio reporta efectos nulos en todos los contextos.
+
 ## 2. Equipo de Trabajo
 
 | Integrantes | Rol Asignado |
@@ -136,3 +139,16 @@ El proyecto de replicación incluye una infraestructura automatizada dividida en
 * **`activate.R`**: es el motor de arranque del entorno. En case de que un usuario clone el repositorio y no tenga `renv` instalado en su máquina, este script se encarga de descargarlo y configurarlo en segundo plano, interceptando las rutas del sistema para que las librerías se instalen de forma aislada.
 * **`.gitignore`**: archivo de control de versiones interno de `renv` cuya función es indicarle a Git que ignore la subcarpeta local donde se descargan los binarios pesados de los paquetes.
 * **`settings.json`**: Archivo de configuración que guarda las preferencias específicas del entorno de `renv` para este proyecto.
+
+## 9. Estado de la Replicación y Hallazgos Metodológicos
+
+Durante el desarrollo de este proyecto, identificamos una brecha significativa entre la disponibilidad de los datos (publicados en OSF) y su reproducibilidad computacional real:
+
+* **Fallas desde los datos crudos:** La replicación directa desde las bases crudas (*Raw Data*) no resultó viable para cinco de los seis países (Brasil, Liberia, Pakistán, Filipinas y Uganda). Se detectaron ausencias de variables clave (como geolocalización o fechas) y errores en los tipos de datos que impidieron la ejecución de los *scripts* de limpieza. **Colombia fue el único caso que se pudo ejecutar y replicar exitosamente.**
+* **Dependencia de datos intermedios:** Debido a los fallos mencionados, la reproducción de los resultados principales (como la Figura 2) dependió estrictamente del uso de los estimadores ya pre-procesados por los autores (`*-estimates.RDS`).
+* **Limitaciones del Repositorio Original:** La ausencia de un archivo `README` original, la falta de gestión de dependencias (inexistencia de un `renv.lock` previo) y el uso de rutas absolutas atadas a tipografías de macOS, obligaron a nuestro equipo a refactorizar el código, integrar Google Fonts y construir toda la arquitectura de reproducibilidad documentada en este repositorio.
+
+## 10. Referencias
+
+* Blair, G., Weinstein, J. M., Christia, F., et al. (2021). *Community policing does not build citizen trust in police or reduce crime in the Global South*. Science, 374(6571), eabd3446. [https://doi.org/10.1126/science.abd3446](https://doi.org/10.1126/science.abd3446)
+* Blair, G., Weinstein, J. M., Christia, F., et al. (2021). *Supplementary Materials for: Community policing does not build citizen trust in police or reduce crime in the Global South*. Science/AAAS. Disponible en: [OSF - Community Policing Data](https://osf.io/2juyz/overview)
