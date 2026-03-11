@@ -95,7 +95,7 @@ p2 <-
 gg <- p + p2 + plot_layout(widths = c(.7, .3))
 # gg
 
-ggsave(gg, height = 5.5, width = 6.5, filename = "article/figures/figure2.pdf")
-extrafont::embed_fonts("article/figures/figure2.pdf")
+ggsave(gg, height = 5.5, width = 6.5, filename = "figures/figure2.pdf")
+extrafont::embed_fonts("figures/figure2.pdf")
 
 

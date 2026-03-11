@@ -36,18 +36,14 @@ p_load(
 
 ```
 
-### 3. Cargar tema personalizado para hacer el gráfico 
+### 3. Cargar tema personalizado para hacer el gráfico
 
 Origianlmente los autores utilizaron las fuentes *Helvetica Neue Medium* y *Courier* para hacer la figura 2. Estas dos fuentes son exclusivas de MacOS y no están presentes en otros sistemas operativos. Para facilitar la reproducción de la figura por personas que usan otros sistemas operativos vamos a cambiar las fuentes por *Sans*.
 
 ```{r}
 #Tema personalizado para hacer la figura
-source(here("scripts", "article_scripts", "helper_functions_and_themes", "0-mkiv-theme.R"))
+source(here("code", "article_scripts", "helper_functions_and_themes", "0-mkiv-theme.R"))
 
-#Agregar fuentes para el texto
-
-#font_add("Helvetica Neue Medium", "/System/Library/Fonts/HelveticaNeue.ttc")
-#font_add("Courier", "/System/Library/Fonts/Courier.dfont")
 ```
 
 ## Cargar datos
@@ -175,6 +171,6 @@ gg <- p + p2 + plot_layout(widths = c(.7, .3))
 ## Guardar la figura replicada
 
 ```{r}
-ggsave(gg, height = 5.5, width = 6.5, filename = here("views", "figura2_blair_2021.jpg"))
+ggsave(gg, height = 5.5, width = 6.5, filename = here("figures", "figura2_blair_2021.jpg"))
 
 ```
