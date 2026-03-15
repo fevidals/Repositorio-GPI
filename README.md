@@ -157,6 +157,7 @@ Una vez clonado el repositorio, es necesario abrir el archivo *Repositorio-GPI.R
 </p>
 
 ### 9.3. Restauración del entorno (renv)
+Dentro de la carpeta de **code** abrimos el script *install-packages.R*, el cual instala todos las librerías requeridas para la replicación, también contiene la función *renv::snapshot()* que registra las versiones de los 141 paquetes instalados y guarda esta información en el archivo *renv.lock*.
 
 ### 9.4. Orden de ejecución del código
 
