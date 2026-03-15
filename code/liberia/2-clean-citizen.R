@@ -648,11 +648,13 @@ lbr_citizen <-
   lbr_citizen_baseline_summarized %>%
   inner_join(lbr_citizen_endline, by = "communities") %>% 
   left_join(lbr_unit, by = "communities") %>% 
-  # replace don't know, refuse to answer or no answer in the survey
-  mutate(across(fear_violent:trust_community, na_if, 99)) %>% 
-  mutate(across(fear_violent:trust_community, na_if, 98)) %>% 
-  mutate(across(fear_violent:trust_community, na_if, 97)) %>% 
-  mutate(across(fear_violent:trust_community, na_if, 88))
+  # 1. Convert the range to numeric first to avoid type mismatch
+  mutate(across(fear_violent:trust_community, as.numeric)) %>% 
+  # 2. Now replace the codes with NA
+  mutate(across(fear_violent:trust_community, ~na_if(.x, 99) %>% 
+                  na_if(98) %>% 
+                  na_if(97) %>% 
+                  na_if(88)))
 
 #--------------------------------------------------------------------------------------------------------------
 # changes to data suggested by the team # refer to issues number 78 on github 
