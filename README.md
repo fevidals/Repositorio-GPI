@@ -153,7 +153,7 @@ git clone [https://github.com/fevidals/Repositorio-GPI.git](https://github.com/f
 Una vez clonado el repositorio, es necesario abrir el archivo *Repositorio-GPI.Rproj* ubicado al inicio del repositorio: 
 
 <p align="center">
-  <img src="documents/rstudio_project.png" alt="Proyecto de RStudio" width="800">
+  <img src="documents/rstudio_project.png" alt="Proyecto de RStudio" width="600", heigh = 500>
 </p>
 
 ### 9.3. Restauración del entorno (renv)
