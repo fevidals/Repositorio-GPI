@@ -140,7 +140,16 @@ El proyecto de replicación incluye una infraestructura automatizada dividida en
 * **`.gitignore`**: archivo de control de versiones interno de `renv` cuya función es indicarle a Git que ignore la subcarpeta local donde se descargan los binarios pesados de los paquetes.
 * **`settings.json`**: Archivo de configuración que guarda las preferencias específicas del entorno de `renv` para este proyecto.
 
-## 9. Estado de la Replicación y Hallazgos Metodológicos
+## 9. Instrucciones de replicación
+
+### 9.1. Clonación del repositorio
+Para poder clonar este repositorio es necesario ejecutar el siguiente comando de Git:
+
+```bash
+git clone [https://github.com/fevidals/Repositorio-GPI.git](https://github.com/fevidals/Repositorio-GPI.git)
+```
+
+## 10. Estado de la Replicación y Hallazgos Metodológicos
 
 Durante el desarrollo de este proyecto, identificamos una brecha significativa entre la disponibilidad de los datos (publicados en OSF) y su reproducibilidad computacional real:
 
@@ -148,7 +157,7 @@ Durante el desarrollo de este proyecto, identificamos una brecha significativa e
 * **Dependencia de datos intermedios:** Debido a los fallos mencionados, la reproducción de los resultados principales (como la Figura 2) dependió estrictamente del uso de los estimadores ya pre-procesados por los autores (`*-estimates.RDS`).
 * **Limitaciones del Repositorio Original:** La ausencia de un archivo `README` original, la falta de gestión de dependencias (inexistencia de un `renv.lock` previo) y el uso de rutas absolutas atadas a tipografías de macOS, obligaron a nuestro equipo a refactorizar el código, integrar Google Fonts y construir toda la arquitectura de reproducibilidad documentada en este repositorio.
 
-## 10. Referencias
+## 11. Referencias
 
 * Blair, G., Weinstein, J. M., Christia, F., et al. (2021). *Community policing does not build citizen trust in police or reduce crime in the Global South*. Science, 374(6571), eabd3446. [https://doi.org/10.1126/science.abd3446](https://doi.org/10.1126/science.abd3446)
 * Blair, G., Weinstein, J. M., Christia, F., et al. (2021). *Supplementary Materials for: Community policing does not build citizen trust in police or reduce crime in the Global South*. Science/AAAS. Disponible en: [OSF - Community Policing Data](https://osf.io/2juyz/overview)
