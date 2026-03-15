@@ -149,6 +149,12 @@ Para poder clonar este repositorio es necesario ejecutar el siguiente comando de
 git clone [https://github.com/fevidals/Repositorio-GPI.git](https://github.com/fevidals/Repositorio-GPI.git)
 ```
 
+### 9.2. Apertura del proyecto en RStudio
+
+### 9.3. Restauración del entorno (renv)
+
+### 9.4. Orden de ejecución del código
+
 ## 10. Estado de la Replicación y Hallazgos Metodológicos
 
 Durante el desarrollo de este proyecto, identificamos una brecha significativa entre la disponibilidad de los datos (publicados en OSF) y su reproducibilidad computacional real:
