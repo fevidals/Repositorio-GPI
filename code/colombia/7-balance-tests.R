@@ -58,7 +58,7 @@ ri2_summ <- summary(ri2_out) %>% rename_with(~paste0(., "_F_ri"))
 
 col_balance_results <- col_balance_df %>% 
   regression_fun() %>% 
-  tidy(conf.int = TRUE) %>% 
+  broom::tidy(conf.int = TRUE) %>% 
   filter(term %in% balance_vars) %>% 
   bind_cols(ri2_summ)
 
