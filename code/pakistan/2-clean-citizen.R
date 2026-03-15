@@ -392,17 +392,21 @@ pak_citizen <-
   select(-stations) %>% 
   mutate(beats = str_to_title(beats)) %>% 
   inner_join(pak_randomization %>% mutate(beats = str_to_title(beats)), by = c("beats")) %>% 
-  # all responses representing do not know are recorded as 97 in the survey questionnaire
-  mutate(across(fear_violent:trust_community, na_if, 97)) %>% 
-  mutate(across(fear_violent_baseline:trust_community_baseline, na_if, 97)) %>% 
-  mutate(across(carmedrob_num_baseline:cmob_any_baseline, na_if, 97)) %>% 
-  # all responses representing refuse to answer are recorded as 98 in the survey questionnaire
-  mutate(across(fear_violent:trust_community, na_if, 98)) %>% 
-  mutate(across(fear_violent_baseline:trust_community_baseline, na_if, 98)) %>% 
-  mutate(across(carmedrob_num_baseline:cmob_any_baseline, na_if, 98)) %>% 
-  # please refer to GH issue # 142
-  mutate(armedrob_num = if_else(armedrob_num == 999, NA_integer_, armedrob_num)) %>% 
-  mutate(armedrob_num_baseline = if_else(armedrob_num_baseline == 999, NA_integer_, armedrob_num_baseline))
+  
+  # 1. Convert everything to numeric first to avoid the "character vs double" error
+  mutate(across(c(fear_violent:trust_community, 
+                  fear_violent_baseline:trust_community_baseline, 
+                  carmedrob_num_baseline:cmob_any_baseline), as.numeric)) %>% 
+  
+  # 2. Efficiently replace 97 and 98 across all relevant ranges at once
+  mutate(across(c(fear_violent:trust_community, 
+                  fear_violent_baseline:trust_community_baseline, 
+                  carmedrob_num_baseline:cmob_any_baseline), 
+                ~na_if(.x, 97) %>% na_if(98))) %>% 
+  
+  # 3. Specific handling for the 999 code (GH issue #142)
+  mutate(armedrob_num = na_if(as.numeric(armedrob_num), 999),
+         armedrob_num_baseline = na_if(as.numeric(armedrob_num_baseline), 999))
 
 # save data
 saveRDS(pak_citizen,  file = "data/out/pak-citizen-clean.RDS")
