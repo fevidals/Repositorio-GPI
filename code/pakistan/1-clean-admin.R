@@ -308,15 +308,18 @@ pak_admin_m <-
   mutate(stations = policestation, beats = beat) %>% 
   group_by(policestation, beat, wave) %>%
   summarise(
-    aarmedrob_num = sum(aarmedrob_num, na.rm = TRUE) / n_days_wave,
-    aaggassault_num = sum(aaggassault_num, na.rm = TRUE) / n_days_wave,
-    asimpleassault_num = sum(asimpleassault_num, na.rm = TRUE) / n_days_wave,
-    asexual_num = sum(asexual_num, na.rm = TRUE) / n_days_wave,
-    adomestic_phys_num = sum(adomestic_phys_num, na.rm = TRUE) / n_days_wave,
-    amurder_num = sum(amurder_num, na.rm = TRUE) / n_days_wave,
-    aother_num_violent = sum(aother_num_violent, na.rm = TRUE) / n_days_wave,
-    aburglary_num = sum(aburglary_num, na.rm = TRUE) / n_days_wave,
-    aother_num_nonviolent = sum(aother_num_nonviolent, na.rm = TRUE) / n_days_wave) %>% 
+    # Wrap n_days_wave in first() to ensure it returns a single value
+    aarmedrob_num = sum(aarmedrob_num, na.rm = TRUE) / first(n_days_wave),
+    aaggassault_num = sum(aaggassault_num, na.rm = TRUE) / first(n_days_wave),
+    asimpleassault_num = sum(asimpleassault_num, na.rm = TRUE) / first(n_days_wave),
+    asexual_num = sum(asexual_num, na.rm = TRUE) / first(n_days_wave),
+    adomestic_phys_num = sum(adomestic_phys_num, na.rm = TRUE) / first(n_days_wave),
+    amurder_num = sum(amurder_num, na.rm = TRUE) / first(n_days_wave),
+    aother_num_violent = sum(aother_num_violent, na.rm = TRUE) / first(n_days_wave),
+    aburglary_num = sum(aburglary_num, na.rm = TRUE) / first(n_days_wave),
+    aother_num_nonviolent = sum(aother_num_nonviolent, na.rm = TRUE) / first(n_days_wave),
+    .groups = "drop" # Good practice to drop groups after summarising
+  ) %>% 
   ungroup() %>%
   filter(!is.na(wave)) %>% 
   distinct(policestation, beat, wave, .keep_all = TRUE) %>%
