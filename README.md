@@ -150,6 +150,9 @@ git clone [https://github.com/fevidals/Repositorio-GPI.git](https://github.com/f
 ```
 
 ### 9.2. Apertura del proyecto en RStudio
+Una vez clonado el repositorio, es necesario abrir el archivo *Repositorio-GPI.Rproj* ubicado al inicio del repositorio: 
+
+
 
 ### 9.3. Restauración del entorno (renv)
 
