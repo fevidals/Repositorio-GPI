@@ -16,6 +16,7 @@ uga_admin_endline <- read.csv("data/in/uganda/06_Raw Administrative Data/UGA_MK4
 uga_admin_endline_unit <-read.csv("data/in/uganda/06_Raw Administrative Data/UGA_MK4_raw_data_endline_admin_unit.csv", stringsAsFactors = F)
 uga_unit <- readRDS("data/out/uga-unit-clean.RDS")
 
+
 #--------------------------------------------------------------------------------------------------------------
 # get admin endline ready for cleaning
 #--------------------------------------------------------------------------------------------------------------
@@ -23,10 +24,11 @@ uga_admin_endline <-
   uga_admin_endline %>% 
   left_join(uga_admin_endline_unit, by = "unit_id") %>% 
   mutate(date_clean = parse_date_time(date_report_r, orders = c("Ymd")),
-         n_days = as.Date("2020-12-20") - as.Date("2018-11-03")) %>% 
+         # Wrap the date subtraction in as.numeric()
+         n_days = as.numeric(as.Date("2020-12-20") - as.Date("2018-11-03"))) %>% 
   group_by(unit_id) %>%
   summarise(
-    aarmedrob_num = sum(crime_r %in% c(27, 3)) / first(n_days),
+    aarmedrob_num = sum(crime_r %in% c(27, 3)) / first(n_days),,
     aburglary_num = sum(crime_r %in% c(1, 2)) / first(n_days),
     aaggassault_num = sum(crime_r == 4) / first(n_days), 
     # aggravated assault coded as assault only (GH issue number 100)
@@ -46,13 +48,13 @@ uga_admin_endline <-
 uga_admin_baseline <- 
   uga_admin_baseline %>% 
   mutate(date_clean = parse_date_time(date_report_r, orders = c("Ymd")),
-         n_days = as.Date("2019-04-10") - as.Date("2017-04-17")) %>%
+         # Convert the time difference to a numeric number of days
+         n_days = as.numeric(as.Date("2019-04-10") - as.Date("2017-04-17"))) %>%
   group_by(unit_id) %>%
   summarize(
     aarmedrob_num = sum(crime_r %in% c(3)) / first(n_days),
     aburglary_num = sum(crime_r %in% c(1, 2)) / first(n_days),
     aaggassault_num = sum(crime_r == 4) / first(n_days),
-    # aggravated assault coded as assault only (GH issue number 100)
     asexual_num = sum(crime_r %in% c(17, 23)) / first(n_days),
     adomestic_phys_num = sum(crime_r == 18) / first(n_days),
     aland_num = sum(crime_r == 9) / first(n_days),
