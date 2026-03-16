@@ -19,7 +19,7 @@ meta_estimates_main_hypotheses <-
   bind_rows(secondary_hypotheses) %>% 
   bind_rows(filter(meta_estimates_main_hypotheses, hypothesis != "1a"))
   
-source("article/code/0-mkiv-theme.R")
+#source("article/code/0-mkiv-theme.R")
 
 fig1_df <- 
   meta_estimates_main_hypotheses %>%
