@@ -164,8 +164,9 @@ p2 <-
 
 4.  Juntar la gráfica de los intervalos de confianza con la tabla de los efectos estimados y las medidas de significancia estadística
 
-```{r}
+```{r, warning = FALSE}
 gg <- p + p2 + plot_layout(widths = c(.7, .3))
+gg
 ```
 
 ## Guardar la figura replicada
