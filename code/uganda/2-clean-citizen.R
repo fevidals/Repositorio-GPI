@@ -558,11 +558,18 @@ uga_citizen <-
   left_join(uga_unit, by = c("village_id", "station_id")) %>%
   full_join(uga_citizen_baseline %>% mutate(in_baseline = 1), by = c("village_id", "citizen_id")) %>% 
   replace_na(list(in_endline = 0, in_baseline = 0)) %>% 
-  filter(in_endline == 1) %>%   # note removes 510 observations that were interviewed at baseline but could not be recontacted at endline
-  # replace baseline values with missing and non responses and other responses
+  filter(in_endline == 1) %>% 
+  
+  # Garantizamos que las columnas sean numéricas antes de los reemplazos
+  mutate(across(fear_violent:compliance_meeting, as.numeric)) %>% 
+  mutate(across(fear_violent_baseline:compliance_meeting_baseline, as.numeric)) %>% 
+  
+  # Reemplazo de códigos para variables de Endline
   mutate(across(fear_violent:compliance_meeting, na_if, 999)) %>% 
   mutate(across(fear_violent:compliance_meeting, na_if, 777)) %>% 
   mutate(across(fear_violent:compliance_meeting, na_if, 888)) %>% 
+  
+  # Reemplazo de códigos para variables de Baseline
   mutate(across(fear_violent_baseline:compliance_meeting_baseline, na_if, 999)) %>% 
   mutate(across(fear_violent_baseline:compliance_meeting_baseline, na_if, 777)) %>% 
   mutate(across(fear_violent_baseline:compliance_meeting_baseline, na_if, 888))

@@ -8,24 +8,24 @@ suppressMessages({
 
 set.seed(42)
 
-lbr_citizen <- readRDS("data/out/lbr-citizen-construct.RDS")
+pak_citizen <- readRDS("data/out/pak-citizen-construct.RDS")
 
 source("code/meta-analysis/0-variable-labels.R")
 
 main_outcomes <- main_hypotheses_original %>% slice(1:8) %>% filter(outcome != "officer_attitude_idx") %>% pull(outcome)
 
-lbr_citizen <- readRDS("data/out/lbr-citizen-construct.RDS")
+pak_citizen <- readRDS("data/out/pak-citizen-construct.RDS")
 
-lbr_variance_df <- lbr_citizen %>% 
-  select(communities, police_zones, Z, any_of(main_outcomes)) %>% 
+pak_variance_df <- pak_citizen %>% 
+  select(beats, stations, Z, any_of(main_outcomes)) %>% 
   na.omit
 
-lbr_declaration <- 
-  with(lbr_variance_df, {
+pak_declaration <- 
+  with(pak_variance_df, {
     declare_ra(
-      blocks = police_zones,
-      clusters = communities,
-      conditions = 0:1
+      blocks = stations,
+      clusters = beats,
+      conditions = 0:2
     )
   })
 
@@ -42,18 +42,18 @@ tidy_f_var_test <- function(data, var = "value", treat = "Z") {
 ri_f_var_test <- function(data) {
   conduct_ri(
     test_function = tidy_f_var_test,
-    declaration = lbr_declaration,
+    declaration = pak_declaration,
     assignment = "Z",
     sharp_hypothesis = 0,
     sims = 1000,
     data = data)
 }
 
-lbr_var_test_results <- lbr_variance_df %>% 
-  select(communities, police_zones, Z, any_of(main_outcomes)) %>% 
+pak_var_test_results <- pak_variance_df %>% 
+  select(beats, stations, Z, any_of(main_outcomes)) %>% 
   pivot_longer(cols = any_of(main_outcomes)) %>% 
   group_by(name) %>% 
   do(summary(ri_f_var_test(data = .))) %>% 
   ungroup
 
-saveRDS(lbr_var_test_results, file = "data/out/lbr-var-test.RDS")
+saveRDS(pak_var_test_results, file = "data/out/pak-var-test.RDS")

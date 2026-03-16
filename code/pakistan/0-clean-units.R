@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------------------------------------------
-# all loaded packages come here
+# R packages and code
 #--------------------------------------------------------------------------------------------------------------
 suppressMessages({
   library(tidyverse)
@@ -7,52 +7,71 @@ suppressMessages({
 })
 
 #--------------------------------------------------------------------------------------------------------------
-# construct dataset of study units
+# get raw data
 #--------------------------------------------------------------------------------------------------------------
-# load treatment assignment
-lbr_treatment_assignment <- read.csv("data/in/liberia/02_Randomization/LIB_MK4_sample.csv", stringsAsFactors = F)
-# load census data for population weights
-lbr_census <- read.csv("data/in/liberia/06_Raw Administrative Data/LIB_MK4_2008_census.csv")
-# load community sample frame
-lbr_community_sample_frame <- read.csv("data/in/liberia/02_Randomization/LIB_MK4_assignment_data.csv", stringsAsFactors = F)
+pak_randomization <- read_dta("data/in/pakistan/02_Randomization/PK_MK4_actual_assignment.dta")
+pak_sampling_frame <-  read_dta("data/in/pakistan/02_Randomization/PK_MK4_sampling_frame.dta")
+pak_population <- read_dta("data/in/pakistan/07_Processed Data/a_First Stage Processing/Survey Data/PK_MK4_Beat_Pop.dta")
 
 #--------------------------------------------------------------------------------------------------------------
-# construct sampling frame work dataset
+# create weights (citizen)
 #--------------------------------------------------------------------------------------------------------------
-lbr_unit <- 
-  lbr_community_sample_frame %>% 
-  rename(police_zones = Police.Zone, towncode = commcode) %>% 
-  full_join(lbr_treatment_assignment %>% mutate(sampled = 1L), by = "towncode") %>% 
-  replace_na(list(sampled = 0L)) %>% 
-  rename(communities = towncode, Z = treatment) %>% 
-  # join and merge in population weights
-  left_join(lbr_census, by = c("communities" = "towncode")) %>% 
-  as_tibble() %>% 
-  # clean police zones
-  mutate(police_zones = str_replace_all(police_zones, " ", "")) %>% 
-  # generate weights
+pak_weights <- 
+  pak_randomization %>% 
+  select(block_ID, Cluster_ID, type_sample) %>% 
+  mutate(sampled = TRUE) %>% 
+  right_join(pak_sampling_frame, by = c("block_ID", "Cluster_ID")) %>% 
+  arrange(block_ID, Cluster_ID) %>% 
+  group_by(block_ID) %>% 
   mutate(
-    S_communities_inclusion_prob = case_when(
-      Z == 1 & police_zones == "ZONE1" ~ 4 / 9,
-      Z == 0 & police_zones == "ZONE1" ~ 5 / 9,
-      Z == 1 & police_zones == "ZONE2" ~ 6 / 13,
-      Z == 0 & police_zones == "ZONE2" ~ 7 / 13,
-      Z == 1 & police_zones == "ZONE3" ~ 8 / 15,
-      Z == 0 & police_zones == "ZONE3" ~ 7 / 15,
-      Z == 1 & police_zones == "ZONE4" ~ 5 / 10,
-      Z == 0 & police_zones == "ZONE4" ~ 5 / 10,
-      Z == 1 & police_zones == "ZONE5" ~ 4 / 9,
-      Z == 0 & police_zones == "ZONE5" ~ 5 / 9,
-      Z == 1 & police_zones == "ZONE10" ~ 4 / 9,
-      Z == 0 & police_zones == "ZONE10" ~ 5 / 9,
-      Z == 1 & police_zones == "ZONE7" ~ 4 / 7,
-      Z == 0 & police_zones == "ZONE7" ~ 3 / 7,
-      Z == 1 & police_zones == "ZONE8" ~ 4 / 9,
-      Z == 0 & police_zones == "ZONE8" ~ 5 / 9,
-      Z == 1 & police_zones == "ZONE9" ~ 6 / 12,
-      Z == 0 & police_zones == "ZONE9" ~ 6 / 12,
-      TRUE ~ NA_real_),
-    S_citizens_inclusion_prob = 20 / 3 * (localitypop / num_blocks))
+    ps_beat_count_overall = n(),
+    ps_S1beat_count = na_if(sum(type_sample == 1, na.rm = TRUE), 0L),
+    ps_S2beat_count = na_if(sum(type_sample == 2, na.rm = TRUE), 0L),
+  ) %>% 
+  ungroup %>% 
+  mutate(
+    prob_S1 = ps_S1beat_count / ps_beat_count_overall,
+    prob_S2 = if_else(type_sample == 2, 27/75, NA_real_),
+    Z_multistage_assignment_prob = case_when(
+      type_sample == 1 ~ prob_S1, 
+      type_sample == 2 ~ (1 - prob_S1) * prob_S2,
+      TRUE ~ NA_real_
+    )
+  ) %>% 
+  filter(sampled == TRUE) %>% 
+  inner_join(pak_population, by = c("block_name", "cluster_name")) %>% 
+  mutate(S_multistage_inclusion_survey = (32 / (Population / 7))) %>% 
+  rename(population = Population)
 
-# save final joined file
-saveRDS(lbr_unit,  file = "data/out/lbr-unit-clean.RDS")
+#--------------------------------------------------------------------------------------------------------------
+# randomization code: keep, store, merge
+#--------------------------------------------------------------------------------------------------------------
+# clean sampling frame
+
+pak_sampling_frame <- 
+  pak_sampling_frame %>% 
+  rename(beat = cluster_name, policestation = block_name)
+
+# clean randomization files
+pak_unit <- 
+  pak_randomization %>% 
+  transmute(
+    Cluster_ID,
+    block_ID,
+    Z_alt,
+    Z_common,
+    Z_control, 
+    in_sample = 1L,
+    Z = case_when(
+      Z_common == 0 & Z_alt == 0 ~ 0L,
+      Z_common == 1 & Z_alt == 0 ~ 1L,
+      Z_common == 0 & Z_alt == 1 ~ 2L)) %>% 
+  inner_join(pak_weights, by = c("block_ID", "Cluster_ID")) %>% 
+  full_join(pak_sampling_frame %>% select(-geo_unit_ID), by = c("block_ID", "Cluster_ID")) %>% 
+  mutate(in_sampling = if_else(is.na(Z_common), 0, 1)) %>% 
+  select(geo_unit_ID, population, cluster_id = Cluster_ID, block_ID, Z_common, Z_alt, Z_control, Z, stations = policestation, beats = beat, Z_multistage_assignment_prob, S_multistage_inclusion_survey, in_sample)
+
+#--------------------------------------------------------------------------------------------------------------
+# randomziation code: keep, store, merge
+#--------------------------------------------------------------------------------------------------------------
+saveRDS(pak_unit,  file = "data/out/pak-unit-clean.RDS")
