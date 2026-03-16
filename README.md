@@ -140,26 +140,39 @@ El proyecto de replicación incluye una infraestructura automatizada dividida en
 * **`.gitignore`**: archivo de control de versiones interno de `renv` cuya función es indicarle a Git que ignore la subcarpeta local donde se descargan los binarios pesados de los paquetes.
 * **`settings.json`**: Archivo de configuración que guarda las preferencias específicas del entorno de `renv` para este proyecto.
 
-## 9. Instrucciones de replicación
+## 9. Instrucciones de replicación (Orquestación)
 
 ### 9.1. Clonación del repositorio
-Para poder clonar este repositorio es necesario ejecutar el siguiente comando de Git:
+Para poder clonar este repositorio es necesario ejecutar el siguiente comando en su terminal o Git Bash:
 
 ```bash
 git clone [https://github.com/fevidals/Repositorio-GPI.git](https://github.com/fevidals/Repositorio-GPI.git)
 ```
 
 ### 9.2. Apertura del proyecto en RStudio
-Una vez clonado el repositorio, es necesario abrir el archivo *Repositorio-GPI.Rproj* ubicado al inicio del repositorio: 
+Una vez clonado el repositorio, es necesario abrir el archivo Repositorio-GPI.Rproj ubicado en la raíz del repositorio:
 
 <p align="center">
-  <img src="documents/rstudio_project.png" alt="Proyecto de RStudio" width="600", heigh = 500>
+<img src="documents/rstudio_project.png" alt="Proyecto de RStudio" width="600" height="500">
 </p>
 
 ### 9.3. Restauración del entorno (renv)
 Dentro de la carpeta de **code** abrimos el script *install-packages.R*, el cual instala todos las librerías requeridas para la replicación, también contiene la función *renv::snapshot()* que registra las versiones de los 141 paquetes instalados y guarda esta información en el archivo *renv.lock*.
 
 ### 9.4. Orden de ejecución del código
+Los códigos que deben ejecutarse para replicar los resultados de Colombia, son:
+
+    1. Install-packages.R       
+    2. run-all-brasil.R
+    3. run-all-colombia.R
+    4. run-all-liberia.R
+    5. run-all-pakistan.R
+    6. run-all—phillippines.R
+    7. run-all-uganda.R
+
+#### 9.4.2. Generación de la gráfica de resultados
+La gráfica con los intervalos de los efectos del tratamiento se obtiene al ejecutar el siguiente archivo Rmarkdown: *figure2_remake.Rmd*, ubicado en la ruta code/article_scripts
+
 
 ## 10. Estado de la Replicación y Hallazgos Metodológicos
 
