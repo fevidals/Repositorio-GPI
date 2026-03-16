@@ -1,8 +1,10 @@
 suppressMessages({
   library(tidyverse)
   library(showtext)
-  font_add("Helvetica Neue Medium", "/System/Library/Fonts/HelveticaNeue.ttc")
-  font_add("Courier", "/System/Library/Fonts/Courier.dfont")
+  
+  font_add_google("Inter", "Helvetica Neue Medium") 
+  font_add_google("Courier Prime", "Courier")
+  
   showtext_auto()
   library(patchwork)
 })
@@ -93,9 +95,9 @@ p2 <-
 # p2
 
 gg <- p + p2 + plot_layout(widths = c(.7, .3))
-# gg
+gg
 
 ggsave(gg, height = 5.5, width = 6.5, filename = "figures/figure2.pdf")
-extrafont::embed_fonts("figures/figure2.pdf")
+#extrafont::embed_fonts("figures/figure2.pdf")
 
 
